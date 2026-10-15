@@ -52,7 +52,9 @@ The wiring diagram is being developed using Fritzing.
 
 A Raspberry Pi 4B model is temporarily used to represent the Raspberry Pi 5 because the required 40-pin GPIO connections are compatible.
 
-The final verified wiring diagram will be added here.
+![DustLab Hardware Wiring](images/DustLab_Wiring_bb.png)
+
+*Figure 1. Proposed wiring diagram for DustLab.*
 
 ## Hardware Safety
 
