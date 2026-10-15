@@ -119,7 +119,7 @@ The mockup below shows an experiment in progress. DustLab continuously records P
 
 DustLab will allow users to compare PM2.5 levels after different cleaning methods, including vacuuming, wet mopping, dusting, and no intervention. The graphs will show how particle concentrations change over time and how quickly they decrease.
 
-![Cleaning Methods Comparison](images/Air Quality Cleaning Comparison Dashboard.png)
+![Cleaning Methods Comparison](images/Air%20Quality%20Cleaning%20Comparison%20Dashboard.png)
 
 *Figure 5. Proposed dashboard for comparing PM2.5 levels across different cleaning methods.*
 
