@@ -41,7 +41,7 @@ Monitoring Mode will continuously monitor indoor air quality, alert users to ele
    
 The mockup below illustrates how the DustLab dashboard may display an elevated PM2.5 warning and allow users to record their response.
 
-![DustLab Monitoring Mode Alert](images/DustLab PM2.5 Monitoring Dashboard.png)
+![DustLab Monitoring Mode Alert](images/DustLab%20PM2.5%20Monitoring%20Dashboard.png)
 
 *Figure 1. Proposed Monitoring Mode dashboard showing an elevated PM2.5 alert and user action options.*
 
@@ -51,7 +51,7 @@ DustLab will compare how quickly PM2.5 concentrations decrease using different m
 
 The example below compares the time required to reach a PM2.5 concentration of 15 µg/m³.
 
-![PM2.5 Recovery Comparison](images/PM2.5 Recovery Comparison Dashboard.png)
+![PM2.5 Recovery Comparison](images/PM2.5%20Recovery%20Comparison%20Dashboard.png)
 
 *Figure 2. Example comparison of PM2.5 reduction times using different interventions.*
 
@@ -105,13 +105,13 @@ A user wants to investigate whether opening a window or using an air purifier is
 
    The mockup below illustrates how the Experiment Mode dashboard may allow users to select an experiment type, review current PM values, and start a structured experiment.
 
-![DustLab Experiment Mode Dashboard](images/DustLab Experiment Dashboard1.png)
+![DustLab Experiment Mode Dashboard](images/DustLab%20Experiment%20Dashboard1.png)
 
 *Figure 3. Proposed Experiment Mode dashboard showing experiment selection and PM readings.*
 
 The mockup below shows an experiment in progress. DustLab continuously records PM2.5 measurements while the user tracks the experiment phases and marks the end of the cleaning activity.
 
-![DustLab Experiment in Progress](images/DustLab Experiment Dashboard2.png)
+![DustLab Experiment in Progress](images/DustLab%20Experiment%20Dashboard2.png)
 
 *Figure 4. Proposed Experiment Mode dashboard showing experiment phases and real-time PM2.5 measurements.*
 
