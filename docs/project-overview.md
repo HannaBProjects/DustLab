@@ -20,7 +20,7 @@ A person may notice dust or experience discomfort without knowing:
 A basic air-quality monitor shows current readings but does not necessarily connect them to household activities or preserve enough context for meaningful comparisons.
 
 **The problem DustLab addresses is the lack of an accessible way to connect indoor particle measurements with user-recorded activities and evaluate changes over time.**
-![DustLab System Overview](images/dashboard.png)
+![DustLab System Overview](images/Dashboard.png)
 *Figure 1. Overview of the DustLab IoT system.*
 
 ## 3. Target Users
