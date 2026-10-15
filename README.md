@@ -32,11 +32,11 @@ The system uses **Raspberry Pi 5**, environmental sensors, a web application, an
 | [Operating Modes & Use Cases](docs/operating-modes.md) | Monitoring Mode, Experiment Mode and user interactions |
 | [Experiments & Data Analysis](docs/experiments.md) | Experiment procedures, graphs and comparison methods |
 
-## Project Status
+## Project Status: Design & Documentation
 
-**Planning & Early Development**
+The project concept, proposed hardware wiring, system architecture, operating modes, and experiment methodology have been documented.
 
-Hardware selection and initial wiring diagrams are in progress. Software implementation and testing will follow.
+Physical assembly, software implementation, AWS deployment, and testing are planned as the next stages.
 
 ## Limitations
 
