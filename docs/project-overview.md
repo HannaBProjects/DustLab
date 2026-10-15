@@ -37,6 +37,10 @@ To design and develop an IoT prototype using **Raspberry Pi 5**, environmental s
 
 ## 5. Proposed Solution
 
+![DustLab System Overview](images/system-overview.png)
+
+*Figure 2. High-level overview of the DustLab system.*
+
 DustLab combines two complementary modes:
 
 ### Monitoring Mode — everyday awareness
