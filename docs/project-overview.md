@@ -41,15 +41,17 @@ To design and develop an IoT prototype using **Raspberry Pi 5**, environmental s
 
 *Figure 2. High-level overview of the DustLab system.*
 
-DustLab combines two complementary modes:
+The original DustLab concept proposed two complementary modes. Following the scope revision, only Monitoring Mode will be implemented for this submission. Both are described below to document the original concept.
 
-### Monitoring Mode — everyday awareness
+### Monitoring Mode — selected for implementation
 
 Sensors record **PM1, PM2.5, PM10, CO₂, temperature, and relative humidity** at regular intervals. The system stores readings even when the web dashboard is closed. Users can view current values, historical graphs, and configurable alerts for sustained increases in particle concentrations.
 
 After an alert, the user can record an action such as **“Opened window”** or **“Turned on air purifier.”** DustLab links the event timestamp with measurements before and after the action so the user can see what changed.
 
-### Experiment Mode — structured comparisons
+### Experiment Mode — original concept, deferred
+
+This mode is retained as part of the original proposal but is outside the scope of this submission. The features below describe a potential future enhancement.
 
 A user selects an activity, such as cleaning or cooking, then marks its start and finish in the application. DustLab records the experiment in three stages:
 
@@ -61,40 +63,67 @@ Users can repeat experiments and compare results, including scenarios with **an 
 
 ## 6. Project Objectives
 
-1. Collect reliable time-stamped readings from a **PMS7003** particle sensor and an **SCD41** environmental sensor.
-2. Build a web interface for live readings, charts, historical data, and alerts.
-3. Implement Monitoring Mode and Experiment Mode with manual recording of user actions.
-4. Store measurements, experiments, event timestamps, and settings in SQLite.
-5. Calculate baseline values, peak values, changes from baseline, and recovery times where a target is reached.
-6. Compare repeated experiments under reasonably similar conditions and present the results clearly.
-7. Test the prototype and document its accuracy limitations and practical usefulness.
+The following objectives apply to the revised scope, which focuses on Monitoring Mode:
+
+1. Collect reliable time-stamped readings from the PMS7003 and SCD41 sensors connected to a Raspberry Pi 5.
+2. Transmit sensor readings to a cloud-hosted FastAPI application using a publish-subscribe service.
+3. Store measurements, manually recorded user actions, and alert records in SQLite.
+4. Build a web dashboard displaying current readings, historical graphs, and alerts for sustained increases in PM2.5 concentrations.
+5. Allow users to record actions manually and display these events alongside the measurements.
+6. Deploy the application to AWS using a custom HTTPS domain, require user authentication, and secure data in transit and at rest.
+7. Test the complete monitoring workflow and document the prototype’s limitations.
 
 ## 7. User Scenarios
 
-| Scenario | User interaction | Expected system response |
-|---|---|---|
-| PM2.5 rises during the day | Opens the dashboard after an alert | Shows the current value, recent trend, and alert history |
-| User opens a window | Selects **Opened window** | Saves the event time and displays subsequent measurements |
-| User starts cleaning | Selects **Cleaning → Start**, then **Finish** | Marks the activity and analyses the baseline, peak, and recovery |
-| User tests an air purifier | Records when it is switched on | Tracks the particle trend following activation |
-| User wants to compare methods | Opens the comparison page | Shows results from selected experiments and their conditions |
+The table below distinguishes scenarios included in the current scope from those retained as potential future enhancements.
+Each row describes a separate scenario, not a sequence of actions. The user records one action at a time, such as opening a window or turning on an air purifier, and observes the subsequent measurements before taking another action.
+
+| Scenario | User interaction | Expected system response | Scope status |
+|---|---|---|---|
+| User checks air quality | Opens the dashboard | Shows current readings and historical graphs | Current scope |
+| PM2.5 remains elevated | Views the dashboard warning | Shows the alert and recent PM2.5 trend | Current scope |
+| User opens a window | Selects **Opened window** | Saves the event timestamp and displays a marker alongside measurements | Current scope |
+| User turns on an air purifier | Records the action in the dashboard | Saves the event timestamp so the user can observe subsequent readings | Current scope |
+| User starts a structured cleaning experiment | Selects **Cleaning → Start**, then **Finish** | Tracks baseline, activity, and recovery stages | Future enhancement |
+| User compares experiments | Opens the experiment comparison page | Shows selected experiment results and their conditions | Future enhancement |
 
 For the initial version, user activities are **recorded manually**. Automatic window detection and air-purifier status tracking may be added later using a magnetic contact sensor or a compatible smart plug.
 
-## 8. Scope
+## 8. Scope Revision
+
+The initial DustLab concept included Monitoring Mode and Experiment Mode. Following lecturer feedback that the proposed scope was too large, the project will focus on Monitoring Mode for this submission. Experiment Mode is deferred as a potential future enhancement. This allows more time for implementation, testing, cloud deployment, and security.
+
+## 9. Scope 
 
 ### Minimum Viable Product (MVP)
 
 - Raspberry Pi 5, SCD41, and PMS7003 sensor integration.
-- Continuous measurements stored in SQLite.
-- Web dashboard with current readings and historical charts.
-- Configurable alerts for sustained particle increases.
-- Manual activity logging and experiment start/finish controls.
-- Experiment summaries and basic comparisons.
+- Continuous sensor data collection and transmission using MQTT.
+- Storage of measurements, user actions, and alert records in SQLite.
+- A FastAPI web dashboard with current readings and historical charts.
+- Configurable alerts for sustained increases in PM2.5.
+- Manual logging of one user action at a time, with timestamped markers on the measurement graphs.
+- AWS deployment with a custom HTTPS domain.
+- User authentication and protection of data in transit and at rest.
+
+### Outside the Current Scope
+
+The following features belong to the original Experiment Mode concept
+and will not be implemented for this submission:
+
+- Structured experiment setup and start/finish controls.
+- Automatic tracking of baseline, activity, and recovery stages.
+- Automated experiment summaries and recovery-time calculations.
+- Automated comparisons between experiments or interventions.
+
+Users can observe measurements before and after a recorded action
+on the historical graph, but the MVP will not automatically evaluate
+or rank interventions.
 
 ### Potential Future Enhancements
 
 - Automatic window open/close detection.
+- Experiment Mode with structured workflows and automated comparisons.
 - Automatic air-purifier status tracking.
 - Exportable reports and more advanced comparisons.
 - Predictions based on accumulated measurements, once sufficient data is available.
@@ -105,13 +134,24 @@ Hardware wiring, detailed database structure, application architecture, and expe
 
 The prototype will be considered successful if:
 
-- Sensor readings are collected and stored with correct timestamps during a test period, including while the browser is closed.
-- Both operating modes function without manually entering sensor readings.
-- User actions appear as correctly timed markers alongside the recorded data.
-- The application generates at least two comparable experiment reports with baseline, peak, and recovery information.
-- Repeated tests can be compared through tables or graphs; results can be explained together with their limitations.
+- Readings from both sensors are collected with correct timestamps and transmitted to the cloud application using MQTT.
+- Measurements are stored in SQLite while the web dashboard is closed.
+- The dashboard displays current readings and historical graphs from the stored measurements.
+- A PM2.5 alert is triggered when readings remain above the configured threshold for the configured duration.
+- The user can record one action at a time, and each action appears with the correct timestamp alongside the measurements.
+- The application is accessible through a custom HTTPS domain hosted on AWS.
+- Unauthenticated users cannot access protected dashboard pages or data endpoints.
+- Security measures for data in transit and at rest are implemented, tested, and documented.
 
-For meaningful comparisons, experiments should use a consistent sensor position and room setup, record relevant conditions, and ideally repeat each scenario **at least three times**. A shorter recovery time can be reported only when the selected target is actually reached.
+Testing will cover the complete workflow from sensor readings to
+dashboard display, including data storage, alerts, and manual action
+logging. Any simulated readings used during testing will be clearly
+identified.
+
+Observations before and after individual actions may be used to
+demonstrate the monitoring functionality. Structured experiment
+reports, automated recovery-time calculations, and comparisons
+between interventions are not success criteria for this submission.
 
 ## 10. Limitations and Responsible Use
 
@@ -123,6 +163,21 @@ For meaningful comparisons, experiments should use a consistent sensor position 
 
 ## 11. Expected Outcome
 
-The final outcome will be a working educational IoT prototype and web application that provide continuous indoor air-quality monitoring, time-stamped activity records, structured experiments, and clear comparisons of particle reduction methods.
+The final outcome will be a working IoT prototype and cloud-hosted
+web application focused on Monitoring Mode.
 
-The project's value is not simply displaying sensor numbers: **it helps users understand what happened to the air in a specific room before, during, and after everyday actions.**
+DustLab will provide continuous indoor air-quality measurements,
+current readings, historical graphs, alerts for sustained increases
+in PM2.5, and manual action logging. Users will record one action
+at a time and observe subsequent measurements on the dashboard.
+
+The system will demonstrate sensor integration, MQTT communication,
+database storage, secure access, and deployment to AWS using a
+custom HTTPS domain.
+
+The project's value is in helping users observe indoor air-quality
+trends and changes following individual actions. These observations
+will not establish that an action caused a particular change.
+
+Experiment Mode remains part of the original concept and may be
+developed as a future enhancement.
