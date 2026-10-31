@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DustLab — Monitoring</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #f3f6f8; color: #183142; font-family: system-ui, sans-serif; }
+        main { max-width: 960px; margin: 64px auto; padding: 0 24px; }
+        h1 { margin-bottom: 8px; font-size: 2.5rem; }
+        .subtitle { color: #526675; }
+        .notice { margin: 28px 0; padding: 18px; background: #fff3d6; border: 1px solid #b78625; border-radius: 10px; }
+        .readings { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        article { padding: 24px; background: white; border: 1px solid #d6e0e5; border-radius: 12px; }
+        h2 { margin: 0; font-size: 1rem; }
+        .value { margin: 16px 0 0; font-size: 2.5rem; font-weight: 650; }
+        .unit { font-size: 1rem; font-weight: normal; color: #526675; }
+        footer { margin-top: 28px; color: #526675; }
+    </style>
+</head>
+<body>
+<main>
+    <header>
+        <h1>DustLab</h1>
+        <p class="subtitle">Indoor air quality · Monitoring Mode</p>
+    </header>
+    <p class="notice"><strong>Test data — simulated.</strong> These fixed example values are not sensor measurements. No particle sensor is connected.</p>
+    <section class="readings" aria-label="Example particle concentrations">
+        {% for reading in readings %}
+        <article>
+            <h2>{{ reading.name }}</h2>
+            <p class="value">{{ reading.value }} <span class="unit">µg/m³</span></p>
+        </article>
+        {% endfor %}
+    </section>
+    <footer>Local prototype · Refreshing the page does not collect new measurements.</footer>
+</main>
+</body>
+</html>
