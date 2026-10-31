@@ -3,14 +3,25 @@
 
 ## Overview
 
-DustLab is designed to help users monitor indoor air quality and investigate how everyday activities affect airborne particulate matter concentrations.
+DustLab helps users monitor indoor air quality and observe changes
+in airborne particle concentrations following individual actions.
 
-The proposed application will have two main operating modes:
+The original concept included two operating modes:
 
-1. **Monitoring Mode** — continuous monitoring of indoor air quality.
-2. **Experiment Mode** — structured experiments to measure and compare changes in air quality.
+1. **Monitoring Mode** — Current Scope
+2. **Experiment Mode** — Future Enhancement
 
-Both modes will use measurements collected by sensors connected to a Raspberry Pi 5. The data will be transmitted to a cloud-hosted application and displayed through a web dashboard.
+This section describes the original proposal for Experiment Mode.
+These features are outside the scope of the current submission
+and are retained for potential future development.
+
+Following lecturer feedback, only Monitoring Mode will be implemented
+for this submission. The Experiment Mode description is retained below
+to document the original concept.
+
+The current system will use sensors connected to a Raspberry Pi 5.
+Measurements will be transmitted to a cloud-hosted application and
+displayed through a web dashboard.
 
 ## 1. Monitoring Mode
 
