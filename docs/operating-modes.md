@@ -46,9 +46,14 @@ Monitoring Mode will continuously monitor indoor air quality, alert users to ele
    - **Turned On the Air Purifier**
    - **Closed the Door**
    - **Nothing**
-4. The user selects the option corresponding to their action. Any physical action is performed manually.
-5. DustLab records the event and continues collecting measurements, allowing the user to observe how particulate concentrations change afterwards.
+4. The user selects the option corresponding to their action. Any physical action is performed manually. DustLab does not control windows, doors, or appliances.
+5. DustLab stores the selected response and its timestamp and displays a marker on the measurement graph.
+6. The user observes subsequent readings before taking another action. Selecting **Nothing** records that no intervention was made.
 
+These options are alternatives, not a sequence of actions.
+The intended workflow is to record one action at a time and observe
+subsequent measurements. The application does not automatically
+determine whether that action caused a change in air quality.
    
 The mockup below illustrates how the DustLab dashboard may display an elevated PM2.5 warning and allow users to record their response.
 
@@ -56,7 +61,19 @@ The mockup below illustrates how the DustLab dashboard may display an elevated P
 
 *Figure 1. Proposed Monitoring Mode dashboard showing an elevated PM2.5 alert and user action options.*
 
-### PM2.5 Recovery Comparison
+### PM2.5 Recovery Comparison — Future Enhancement
+
+The original concept included automatic comparison of the time
+required for PM2.5 concentrations to decrease after different
+interventions, such as opening a window or using an air purifier.
+
+This functionality is outside the current scope. In the Monitoring
+Mode MVP, users will record one action at a time and observe
+subsequent measurements on the historical graph. The application
+will not automatically calculate recovery times or rank interventions.
+
+The mockup below is retained to illustrate the proposed future
+comparison feature.
 
 DustLab will compare how quickly PM2.5 concentrations decrease using different methods, including natural decline, opening a window, and using a HEPA air purifier.
 
@@ -64,17 +81,16 @@ The example below compares the time required to reach a PM2.5 concentration of 1
 
 ![PM2.5 Recovery Comparison](images/PM2.5%20Recovery%20Comparison%20Dashboard.png)
 
-*Figure 2. Example comparison of PM2.5 reduction times using different interventions.*
+*Figure 2. Original concept for a future PM2.5 recovery comparison feature; not included in the current MVP.*
 
-**Note:** The values are illustrative. Actual results will depend on sensor measurements and experimental conditions.
-
-
+**Note:** The values are illustrative and do not represent actual measurements.
 
 ### Limitations
 
 DustLab measures airborne particulate matter concentrations but cannot identify specific allergens or pollution sources. Changes observed after a user action do not establish a direct cause-and-effect relationship.
 
-More structured comparisons of air quality improvement methods will be supported by the separate **Experiment Mode**.
+Structured comparisons may be supported by Experiment Mode
+in a future version. They are not included in this submission.
 
 
 ## 2. Experiment Mode
