@@ -11,10 +11,20 @@ The system uses **Raspberry Pi 5**, environmental sensors, a web application, an
 
 ## Key Features
 
-- **Monitoring Mode** — Continuous air quality monitoring, real-time readings, historical graphs, and pollution alerts.
-- **Experiment Mode** — Record activities such as cleaning, cooking, opening windows, or using an air purifier.
-- **Data Analysis** — Compare experiments, visualise pollution trends, and evaluate particle reduction times.
-- **Database Integration** — Store measurements, user actions, alerts, and experiment results.
+- **Continuous Monitoring** — Collect and store indoor air-quality measurements, even when the dashboard is closed.
+- **Web Dashboard** — Display current readings and historical graphs.
+- **Air Quality Alerts** — Notify users of sustained increases in PM2.5 concentrations.
+- **Manual Action Logging** — Record one action at a time, such as opening a window or turning on an air purifier, and display its timestamp alongside measurements.
+- **Database Integration** — Store measurements, user actions, and alert records in SQLite.
+
+## Scope Revision
+
+The original DustLab concept included Monitoring Mode and Experiment Mode.
+Following lecturer feedback, this submission will focus on Monitoring Mode.
+
+Experiment Mode, including structured experiment stages, automated summaries,
+and comparisons, is deferred as a potential future enhancement.
+The original concept is retained in the project documentation.
 
 ## Technologies
 
@@ -29,8 +39,8 @@ The system uses **Raspberry Pi 5**, environmental sensors, a web application, an
 | [Project Overview](docs/project-overview.md) | Problem statement, target users, aims and objectives |
 | [Hardware](docs/hardware.md) | Components, sensors and wiring diagrams |
 | [System Architecture](docs/system-architecture.md) | Software structure, data flow and database design |
-| [Operating Modes & Use Cases](docs/operating-modes.md) | Monitoring Mode, Experiment Mode and user interactions |
-| [Experiments & Data Analysis](docs/experiments.md) | Experiment procedures, graphs and comparison methods |
+| [Operating Modes & Use Cases](docs/operating-modes.md) | Monitoring Mode and the deferred Experiment Mode concept |
+| [Experiments & Data Analysis](docs/experiments.md) | Original experiment methodology proposed for future development |
 
 ## Project Status: Design & Documentation
 
