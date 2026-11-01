@@ -25,16 +25,22 @@
         <h1>DustLab</h1>
         <p class="subtitle">Indoor air quality · Monitoring Mode</p>
     </header>
-    <p class="notice"><strong>Test data — simulated.</strong> These fixed example values are not sensor measurements. No particle sensor is connected.</p>
-    <section class="readings" aria-label="Example particle concentrations">
-        {% for reading in readings %}
+    {% if measurement %}
+    {% if measurement.source == 'simulated' %}
+    <p class="notice"><strong>Test data — simulated.</strong> This value is for development and is not a sensor measurement.</p>
+    {% endif %}
+    <section class="readings" aria-label="Latest stored particle concentration">
         <article>
-            <h2>{{ reading.name }}</h2>
-            <p class="value">{{ reading.value }} <span class="unit">µg/m³</span></p>
+            <h2>PM2.5</h2>
+            <p class="value">{{ measurement.pm25 }} <span class="unit">µg/m³</span></p>
+            <p>Measured at (UTC): <time datetime="{{ measurement.measured_at }}">{{ measurement.measured_at }}</time></p>
+            <p>Source: {{ measurement.source }}</p>
         </article>
-        {% endfor %}
     </section>
-    <footer>Local prototype · Refreshing the page does not collect new measurements.</footer>
+    {% else %}
+    <p class="notice">No measurements available.</p>
+    {% endif %}
+    <footer>Latest stored measurement · Refresh to check for updates. Viewing this page does not create measurements.</footer>
 </main>
 </body>
 </html>
