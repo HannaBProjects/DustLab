@@ -13,9 +13,11 @@ services:
     restart: unless-stopped
     ports:
       - "127.0.0.1:1883:1883"
+      - "8883:8883"
     volumes:
       - ./mosquitto/config:/mosquitto/config:ro
       - ./mosquitto/data:/mosquitto/data
+      - /etc/dustlab-mqtt/certs:/mosquitto/certs:ro
 
   mqtt_subscriber:
     build: .

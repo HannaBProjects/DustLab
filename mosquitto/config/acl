@@ -1,0 +1,5 @@
+user dustlab
+topic read dustlab/pm25
+
+user dustlab_pi
+topic write dustlab/pm25
