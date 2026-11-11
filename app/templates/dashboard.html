@@ -16,7 +16,15 @@
         h2 { margin: 0; font-size: 1rem; }
         .value { margin: 16px 0 0; font-size: 2.5rem; font-weight: 650; }
         .unit { font-size: 1rem; font-weight: normal; color: #526675; }
-        footer { margin-top: 28px; color: #526675; }
+        .status { display: inline-flex; align-items: center; gap: 8px; font-weight: 650; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--color); flex: none; }
+        .levels { margin-top: 32px; }
+        .levels h2 { margin-bottom: 14px; font-size: 1.2rem; }
+        .level-list { padding: 8px 20px; background: white; border: 1px solid #d6e0e5; border-radius: 12px; }
+        .level { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+        .level + .level { border-top: 1px solid #edf1f3; }
+        .level-label { flex: 1; font-weight: 600; }
+        .level-range { white-space: nowrap; }
     </style>
 </head>
 <body>
@@ -26,21 +34,35 @@
         <p class="subtitle">Indoor air quality · Monitoring Mode</p>
     </header>
     {% if measurement %}
-    {% if measurement.source == 'simulated' %}
-    <p class="notice"><strong>Test data — simulated.</strong> This value is for development and is not a sensor measurement.</p>
-    {% endif %}
+    {% set pm25 = measurement.pm25 %}
+    {% if pm25 <= 5 %}{% set status, color = 'Good', '#2fa878' %}
+    {% elif pm25 <= 15 %}{% set status, color = 'Fair', '#9aad24' %}
+    {% elif pm25 <= 50 %}{% set status, color = 'Moderate', '#e6a825' %}
+    {% elif pm25 <= 90 %}{% set status, color = 'Poor', '#e76f51' %}
+    {% elif pm25 <= 140 %}{% set status, color = 'Very poor', '#a653c1' %}
+    {% else %}{% set status, color = 'Extremely poor', '#99384b' %}{% endif %}
     <section class="readings" aria-label="Latest stored particle concentration">
         <article>
             <h2>PM2.5</h2>
             <p class="value">{{ measurement.pm25 }} <span class="unit">µg/m³</span></p>
+            <p class="status"><span class="dot" style="--color: {{ color }}" aria-hidden="true"></span>{{ status }}</p>
             <p>Measured at (UTC): <time datetime="{{ measurement.measured_at }}">{{ measurement.measured_at }}</time></p>
-            <p>Source: {{ measurement.source }}</p>
         </article>
     </section>
     {% else %}
     <p class="notice">No measurements available.</p>
     {% endif %}
-    <footer>Latest stored measurement · Refresh to check for updates. Viewing this page does not create measurements.</footer>
+    <section class="levels" aria-labelledby="levels-heading">
+        <h2 id="levels-heading">PM2.5 levels</h2>
+        <div class="level-list">
+            <div class="level"><span class="dot" style="--color: #2fa878" aria-hidden="true"></span><span class="level-label">Good</span><span class="level-range">0–5 µg/m³</span></div>
+            <div class="level"><span class="dot" style="--color: #9aad24" aria-hidden="true"></span><span class="level-label">Fair</span><span class="level-range">&gt;5–15 µg/m³</span></div>
+            <div class="level"><span class="dot" style="--color: #e6a825" aria-hidden="true"></span><span class="level-label">Moderate</span><span class="level-range">&gt;15–50 µg/m³</span></div>
+            <div class="level"><span class="dot" style="--color: #e76f51" aria-hidden="true"></span><span class="level-label">Poor</span><span class="level-range">&gt;50–90 µg/m³</span></div>
+            <div class="level"><span class="dot" style="--color: #a653c1" aria-hidden="true"></span><span class="level-label">Very poor</span><span class="level-range">&gt;90–140 µg/m³</span></div>
+            <div class="level"><span class="dot" style="--color: #99384b" aria-hidden="true"></span><span class="level-label">Extremely poor</span><span class="level-range">&gt;140 µg/m³</span></div>
+        </div>
+    </section>
 </main>
 </body>
 </html>
