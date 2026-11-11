@@ -24,6 +24,10 @@ def on_message(client, userdata, message):
     try:
         data = json.loads(message.payload.decode("utf-8"))
         value = data["pm25"]
+        source = data.get("source", "simulated")
+
+        if source not in ("simulated", "sensor"):
+            raise ValueError("Invalid measurement source")
 
         if isinstance(value, bool):
             raise ValueError("PM2.5 must be a number")
@@ -38,7 +42,7 @@ def on_message(client, userdata, message):
         return
 
     with SessionLocal() as db:
-        db.add(Measurement(pm25=pm25, source="simulated"))
+        db.add(Measurement(pm25=pm25, source=source))
         db.commit()
 
     print(f"Saved MQTT PM2.5: {pm25}", flush=True)
